@@ -276,7 +276,7 @@ export default function HomePage() {
                   position: "absolute", left: "18px", top: "22px",
                   width: "2px", bottom: "22px",
                   background: "#146321", borderRadius: "2px",
-                  transformOrigin: "top center", scaleY: 0,
+                  transformOrigin: "top center", transform: "scaleY(0)",
                 }}
               />
 
