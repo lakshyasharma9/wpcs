@@ -26,13 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className="antialiased">
       <head>
         <style dangerouslySetInnerHTML={{
           __html: `nextjs-portal, nextjs-portal * { display: none !important; }`
         }} />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="flex flex-col">
         <SmoothScroll />
         <LoaderWrapper />
         <Navbar />
