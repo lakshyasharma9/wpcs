@@ -343,8 +343,60 @@ body {
 
 @media (max-width: 640px) {
   .section-container {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* Mobile-only: Fix Vision & Mission image cutoff */
+@media (max-width: 767px) {
+  .vision-mission-section {
+    overflow-x: hidden !important;
+  }
+  
+  .vision-mission-section .section-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    max-width: 100% !important;
+  }
+  
+  .vision-mission-section .grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .vision-mission-label {
+    display: block !important;
+    margin-top: -2px !important;
+    margin-bottom: 16px !important;
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+  
+  .vision-mission-img {
+    height: auto !important;
+    aspect-ratio: 4/3 !important;
+    margin-bottom: 10 !important;
+    margin-left: auto !important;
+    margin-right: 100px !important;
+    width: 80% !important;
+    max-width: 100% !important;
+    order: 2 !important;
+  }
+  
+  .vision-mission-content {
+    margin-top: 24px !important;
+    order: 3 !important;
+    padding-left: 0 !important;
+    padding-right: 35px !important;
+  }
+  
+  .vision-mission-label-wrapper {
+    order: 1 !important;
   }
 }
 

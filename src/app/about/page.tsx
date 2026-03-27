@@ -164,13 +164,20 @@ export default function AboutPage() {
       {/* ══════════════════════════════════════════════════════════════════
           VISION & MISSION - Alternating Layout
       ══════════════════════════════════════════════════════════════════ */}
-      <section className="relative bg-white" style={{ paddingTop: "clamp(100px, 15vh, 160px)", paddingBottom: "clamp(90px, 15vh, 160px)"}}>
+      <section className="vision-mission-section relative bg-white" style={{ paddingTop: "clamp(100px, 15vh, 160px)", paddingBottom: "clamp(90px, 15vh, 160px)"}}>
         <div className="section-container">
           
           {/* Vision Section - Image Left, Content Right */}
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center" style={{ marginBottom: "clamp(80px, 12vh, 120px)" }}>
+            {/* Label - Mobile Only */}
+            <div className="vision-mission-label-wrapper md:hidden">
+              <span className="vision-mission-label inline-block text-xs font-[family-name:var(--font-heading)] font-bold text-[#D4AF37] tracking-wider uppercase" style={{fontSize: "20px"}}>
+                Our Vision
+              </span>
+            </div>
+            
             {/* Image */}
-            <div ref={addToRefs} className="opacity-0 translate-x-10 transition-all duration-1000 relative rounded-3xl overflow-hidden shadow-2xl" style={{ height: "clamp(450px, 55vh, 650px)", marginBottom: "clamp(20px, 4vh, 32px)" }}>
+            <div ref={addToRefs} className="vision-mission-img opacity-0 translate-x-10 transition-all duration-1000 relative rounded-3xl overflow-hidden shadow-2xl" style={{ height: "clamp(450px, 55vh, 650px)", marginBottom: "clamp(20px, 4vh, 32px)" }}>
               <Image
                 src="/about/hero-building.jpg"
                 alt="Our Vision"
@@ -180,8 +187,8 @@ export default function AboutPage() {
             </div>
 
             {/* Content */}
-            <div ref={addToRefs} className="opacity-0 translate-x-10 transition-all duration-1000 delay-200">
-              <span className="inline-block text-xs font-[family-name:var(--font-heading)] font-bold text-[#D4AF37] tracking-wider uppercase mb-4" style={{fontSize: "20px"}}>
+            <div ref={addToRefs} className="vision-mission-content opacity-0 translate-x-10 transition-all duration-1000 delay-200">
+              <span className="hidden md:inline-block text-xs font-[family-name:var(--font-heading)] font-bold text-[#D4AF37] tracking-wider uppercase mb-4" style={{fontSize: "20px"}}>
                 Our Vision
               </span>
               
@@ -213,9 +220,16 @@ export default function AboutPage() {
 
           {/* Mission Section - Content Left, Image Right */}
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center">
+            {/* Label - Mobile Only */}
+            <div className="vision-mission-label-wrapper md:hidden">
+              <span className="vision-mission-label inline-block text-xs font-[family-name:var(--font-heading)] font-bold text-[#D4AF37] tracking-wider uppercase" style={{fontSize: "20px"}}>
+                Our Mission
+              </span>
+            </div>
+            
             {/* Content */}
-            <div ref={addToRefs} className="opacity-0 translate-x-10 transition-all duration-1000 order-2 md:order-1">
-              <span className="inline-block text-xs font-[family-name:var(--font-heading)] font-bold text-[#D4AF37] tracking-wider uppercase mb-4" style={{fontSize: "20px"}}>
+            <div ref={addToRefs} className="vision-mission-content opacity-0 translate-x-10 transition-all duration-1000 order-2 md:order-1">
+              <span className="hidden md:inline-block text-xs font-[family-name:var(--font-heading)] font-bold text-[#D4AF37] tracking-wider uppercase mb-4" style={{fontSize: "20px"}}>
                 Our Mission
               </span>
               
@@ -245,7 +259,7 @@ export default function AboutPage() {
             </div>
 
             {/* Image */}
-            <div ref={addToRefs} className="opacity-0 translate-x-10 transition-all duration-1000 delay-200 relative rounded-3xl overflow-hidden shadow-2xl order-1 md:order-2" style={{ height: "clamp(450px, 55vh, 650px)" }}>
+            <div ref={addToRefs} className="vision-mission-img opacity-0 translate-x-10 transition-all duration-1000 delay-200 relative rounded-3xl overflow-hidden shadow-2xl order-1 md:order-2" style={{ height: "clamp(450px, 55vh, 650px)" }}>
               <Image
                 src="/about/our-mission.png"
                 alt="Our Mission"
