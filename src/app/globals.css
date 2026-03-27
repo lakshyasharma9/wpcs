@@ -352,12 +352,14 @@ body {
 @media (max-width: 767px) {
   .vision-mission-section {
     overflow-x: hidden !important;
+    
   }
   
   .vision-mission-section .section-container {
     padding-left: 16px !important;
     padding-right: 16px !important;
     max-width: 100% !important;
+    margin-top: -50px;
   }
   
   .vision-mission-section .grid {
@@ -375,15 +377,16 @@ body {
     position: static !important;
     background: transparent !important;
     padding: 0 !important;
+    font-size: 25px !important;
   }
   
   .vision-mission-img {
     height: auto !important;
-    aspect-ratio: 4/3 !important;
+    aspect-ratio: 3/3 !important;
     margin-bottom: 10 !important;
-    margin-left: auto !important;
+    margin-left: 25px !important;
     margin-right: 100px !important;
-    width: 80% !important;
+    width: 95% !important;
     max-width: 100% !important;
     order: 2 !important;
   }
@@ -393,6 +396,7 @@ body {
     order: 3 !important;
     padding-left: 0 !important;
     padding-right: 35px !important;
+    margin-left: -20px;
   }
   
   .vision-mission-label-wrapper {
