@@ -383,14 +383,14 @@ export default function AboutPage() {
           </div>
 
           <div 
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 max-w-6xl mx-auto"
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-5 md:gap-6 max-w-6xl mx-auto"
             onMouseEnter={() => setActiveCard(null)}
           >
             {[
-              { name: "John West", role: "CEO & FOUNDER", image: "/about/team.jpg" },
-              { name: "Sarah Palm", role: "HEAD OF BIM", image: "/about/team.jpg" },
-              { name: "David Construction", role: "LEAD VDC STRATEGY", image: "/about/team.jpg" },
-              { name: "Jessica Solutions", role: "CHIEF COORDINATION OFFICER", image: "/about/team.jpg" },
+              { name: "Kaushal Vijay", role: "MANAGER", image: "/about/Picture1.png" },
+              { name: "Sagar Mohare", role: "BIM COORDINATOR", image: "/about/Picture2.png" },
+              { name: "Arvind Kumar", role: "PROJECT ENGINEER", image: "/about/Picture3.png" },
+              { name: "Abhishek Kumar Gupta", role: "MEPF BIM MODELER", image: "/about/Picture4.png" },
             ].map((member, i) => (
               <div
                 key={i}
@@ -401,7 +401,7 @@ export default function AboutPage() {
                 onMouseLeave={() => setActiveCard(null)}
               >
                 <div 
-                  className="relative rounded-3xl overflow-hidden h-[380px] cursor-pointer transition-all duration-500"
+                  className="relative rounded-3xl overflow-hidden h-[450px] sm:h-[380px] cursor-pointer transition-all duration-500"
                   style={{
                     transform: activeCard === i ? 'scale(1.08) translateY(-10px)' : activeCard !== null ? 'scale(0.95)' : 'scale(1)',
                     filter: activeCard !== null && activeCard !== i ? 'blur(4px)' : 'blur(0px)',
@@ -413,18 +413,19 @@ export default function AboutPage() {
                       src={member.image}
                       alt={member.name}
                       fill
-                      className="object-cover transition-all duration-500"
+                      className="object-cover"
                       style={{
                         filter: activeCard === i ? 'grayscale(0%)' : 'grayscale(100%)',
+                        objectPosition: 'center 20%',
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-                    <h3 className="text-white font-bold text-lg mb-1 font-[family-name:var(--font-heading)]">
+                  <div className="absolute bottom-0 left-0 right-0 pb-8 px-5 z-10 text-center">
+                    <h3 className="font-bold mb-1 font-[family-name:var(--font-heading)]" style={{ color: '#FFFFFF', fontSize: 'clamp(1.5rem, 4vw, 1.5rem)', textShadow: '2px 2px 8px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.8)' }}>
                       {member.name}
                     </h3>
-                    <p className="text-[#D4AF37] text-xs font-semibold tracking-wider">
+                    <p className="text-xs font-semibold tracking-wider" style={{ color: '#D4AF37', textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
                       {member.role}
                     </p>
                   </div>
