@@ -1,129 +1,225 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { 
-  Ruler, 
-  Building2, 
-  Layers, 
-  Box, 
-  Monitor, 
-  Calendar,
-  Layers as VDC,
-  Hammer,
-  Clock,
-  Layout,
+import {
+  Building2,
   Fullscreen,
   Workflow,
-  CheckCircle2
+  CheckCircle2,
+  ArrowUpRight
 } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
+import MagneticButton from "@/components/MagneticButton";
 
 const FloatingShapes = dynamic(() => import("@/components/FloatingShapes"), {
   ssr: false,
 });
 
+// ─── Services Data (matching ServiceCard component interface) ─────────────────
 const allServices = [
   {
-    title: "Quantity Take-Off (QTO)",
-    description: "Highly accurate 5D cost estimation and quantity extraction directly from BIM models. We provide detailed material breakdowns and cost analysis to ensure your project stays on budget.",
-    icon: <Ruler size={32} />,
-    features: ["Digital measurement", "Material tracking", "Cost validation", "Bid support"]
+    title: "BIM (MEPF)",
+    description:
+      "Comprehensive 3D Building Information Modeling for Mechanical, Electrical, Plumbing, and Fire Protection (MEPF) systems. We deliver clash-free, coordinated models to streamline your entire construction process.",
+    image: "/BIM(MEPF).png",
+    href: "/services/bim-mepf",
   },
   {
-    title: "BIM Modeling (LOD 100-500)",
-    description: "Multi-disciplinary Building Information Modeling that captures every architectural, structural, and MEP detail. Our models serve as the single source of truth for the entire project life cycle.",
-    icon: <Building2 size={32} />,
-    features: ["Architectural BIM", "Structural BIM", "MEPFS modeling", "As-built models"]
+    title: "Prefabrication",
+    description:
+      "Detailed modeling and accurate spool drawings designed to optimize off-site manufacturing, reduce waste, and accelerate on-site installation.",
+    image: "/Prefabrication.png",
+    href: "/services/prefabrication",
   },
   {
-    title: "VDC Coordination",
-    description: "Virtual Design & Construction workflows that integrate all project stakeholders. We manage clash detection and resolution processes to eliminate site issues before they happen.",
-    icon: <VDC size={32} />,
-    features: ["Clash detection", "Resolution management", "Trade coordination", "BIM execution planning"]
+    title: "Estimation",
+    description:
+      "Precise material take-offs and cost estimates to help you bid competitively, plan budgets accurately, and control project finances.",
+    image: "/Estimation.png",
+    href: "/services/estimation",
   },
   {
-    title: "Digital Prefabrication",
-    description: "Translating design models into precise shop drawings and fabrication-ready outputs. We optimize components for off-site manufacturing to accelerate field installation.",
-    icon: <Box size={32} />,
-    features: ["Shop drawings", "SPOOL drawings", "Modular design", "CNC integration"]
+    title: "Renderings",
+    description:
+      "High-quality, photorealistic 3D visualizations that bring your designs to life, helping stakeholders easily conceptualize the final build.",
+    image: "/Renderings.png",
+    href: "/services/renderings",
   },
   {
-    title: "Photorealistic Rendering",
-    description: "Immersive 3D visualizations that communicate design intent with stunning clarity. From high-end interior stills to dynamic architectural walkthroughs.",
-    icon: <Monitor size={32} />,
-    features: ["Interior/Exterior renders", "VR/AR experiences", "Fly-through animations", "Marketing assets"]
+    title: "Submittals Review",
+    description:
+      "Thorough evaluation of shop drawings, equipment data, and material specifications to ensure strict compliance with project standards and design intent.",
+    image: "/Submittals Review.png",
+    href: "/services/submittals-review",
   },
   {
-    title: "4D Construction Scheduling",
-    description: "Integrating the project schedule with the 3D model to visualize the construction sequence over time. Identify logistical bottlenecks and optimize site phasing.",
-    icon: <Calendar size={32} />,
-    features: ["Sequence simulation", "Logistics planning", "Resource leveling", "Visual progress tracking"]
+    title: "Project Management",
+    description:
+      "End-to-end project oversight, including schedule coordination, resource allocation, and workflow optimization to ensure on-time delivery.",
+    image: "/Project Management.png",
+    href: "/services/project-management",
   },
   {
-    title: "MEP Coordination",
-    description: "Specialized coordination of mechanical, electrical, and plumbing systems to ensure spatial efficiency and maintenance accessibility in complex building cores.",
-    icon: <Hammer size={32} />,
-    features: ["Pipe/Duct routing", "Electrical containment", "Plant room layouts", "Service access checks"]
+    title: "Drone Video",
+    description:
+      "High-resolution aerial videography for accurate site surveys, real-time construction progress tracking, and compelling marketing material.",
+    image: "/Drone Video.png",
+    href: "/services/drone-video",
   },
-  {
-    title: "Point Cloud to BIM",
-    description: "Converting high-density laser scan data into accurate intelligent BIM models for renovation, retrofit, and heritage restoration projects.",
-    icon: <Fullscreen size={32} />,
-    features: ["Laser scan processing", "Scan-to-BIM modeling", "Existing condition audits", "Deformation analysis"]
-  },
-  {
-    title: "BIM Management",
-    description: "Strategic consulting for firms looking to implement or optimize their BIM workflows. We provide standards development, training, and project-specific BIM management.",
-    icon: <Layout size={32} />,
-    features: ["ISO 19650 compliance", "Custom workflows", "Software training", "Audit services"]
-  }
 ];
+
+// Shared container class — same on every section for equal L/R margins
+const CONTAINER = "w-full max-w-7xl mx-auto px-8 sm:px-12 lg:px-16";
 
 export default function ServicesPage() {
   return (
-    <div className="pt-24 md:pt-28 min-h-screen bg-[#F8FAF8]">
-      <div className="absolute inset-0 z-0 opacity-30">
+    <div className="min-h-screen bg-[#F8FAF8] relative">
+      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
         <FloatingShapes />
       </div>
 
-      <section className="relative py-16 md:py-24 px-4 sm:px-6 lg:px-8 z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-2xl mb-16 md:mb-24">
-            <span className="inline-block text-xs font-bold text-[#146321] tracking-[0.18em] uppercase mb-4">
-              Our Capabilities
-            </span>
-            <h1
-              className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-5 font-[family-name:var(--font-heading)]"
-              style={{ lineHeight: 1.1, letterSpacing: "-0.02em" }}
+      {/* ── HERO ─────────────────────────────────────────────────────────── */}
+      <section className="relative w-full h-screen max-h-[1080px] min-h-[600px] overflow-hidden flex flex-col justify-center items-center text-center z-10">
+        <style>{`
+          @keyframes smoothZoom {
+            0%   { transform: scale(1);    }
+            45%  { transform: scale(1.15); }
+            75%  { transform: scale(1.22); }
+            100% { transform: scale(1);    }
+          }
+          .animate-smoothZoom {
+            animation: smoothZoom 25s ease-in-out infinite;
+            will-change: transform;
+          }
+        `}</style>
+
+        <div className="absolute inset-0 z-[-1]">
+          <div
+            className="w-full h-full bg-cover bg-center animate-smoothZoom origin-center"
+            style={{ backgroundImage: 'url("/services/pic22.jpg")' }}
+          />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+
+        <div
+          className="relative z-20 flex flex-col items-center justify-center px-6 max-w-5xl mx-auto"
+          style={{ marginTop: "40px" }}
+        >
+          <h1
+            className="drop-shadow-lg text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.2]"
+            style={{ color: "#D4AF37", marginBottom: "28px" }}
+          >
+            Elevating Construction <br className="hidden md:block" />
+            Standards,{" "}
+            <span
+              className="text-white font-serif italic font-medium"
+              style={{ fontFamily: "Georgia, serif" }}
             >
-              Leading <span className="text-[#146321]">Services</span>
-            </h1>
-            <p className="text-base md:text-lg text-[#475569]" style={{ lineHeight: 1.75, maxWidth: "580px" }}>
-              We provide a comprehensive range of construction technology services
-              designed to maximize efficiency, reduce costs, and ensure the highest levels of
-              project quality.
-            </p>
+              One Project at a Time
+            </span>
+          </h1>
+
+          <p
+            className="text-white drop-shadow-md text-sm md:text-base font-normal max-w-2xl leading-relaxed opacity-90"
+            style={{ marginBottom: "36px" }}
+          >
+            From precision BIM modeling to full-scale VDC coordination, we offer
+            a comprehensive suite of professional construction technology
+            services.
+          </p>
+
+          <MagneticButton
+            href="/contact"
+            variant="primary"
+            className="!bg-[#D4AF37] hover:!bg-[#146321] transition-colors duration-500 !border-none !px-8 !py-4 !text-lg !text-white flex items-center justify-center"
+          >
+            <span className="flex items-center gap-2 font-semibold tracking-wide">
+              Contact Us
+              <ArrowUpRight size={22} className="stroke-[2.5px]" />
+            </span>
+          </MagneticButton>
+        </div>
+      </section>
+
+      {/* ── SERVICES GRID ──────────────────────────────────────────────────── */}
+      <section
+        className="relative bg-[#F8FAF8] z-10 w-full"
+        style={{
+          paddingTop: "clamp(80px, 10vh, 130px)",
+          paddingBottom: "clamp(80px, 10vh, 130px)",
+        }}
+      >
+        <div className="section-container">
+
+          {/* Section heading — left margin from section-container, gap below */}
+          <div className="mb-20 md:mb-28" style={{marginBottom:"50px"}}>
+            <span className="block text-sm font-semibold text-[#146321] mb-3 uppercase tracking-widest">
+              [Our Services]
+            </span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl text-[#146321] leading-[1.1] font-sans font-medium tracking-tight" style={{color:"#146321", marginBottom: "120px"}}>
+              Browse All Our{" "}
+              <span
+                className="font-serif italic font-medium tracking-normal text-black"
+                style={{ fontFamily: "Georgia, serif" , color:"#D4AF37" , marginBottom: "90px"} }
+              >
+                Services
+              </span>
+            </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {allServices.map((service, i) => (
-              <div key={i} className="group relative">
-                <div className="glass rounded-2xl md:rounded-3xl p-7 md:p-9 h-full flex flex-col transition-all duration-500 hover:shadow-[0_40px_80px_rgba(20,99,33,0.12)] border-b-4 border-transparent hover:border-[#146321]">
-                   <div className="w-14 h-14 rounded-2xl bg-[rgba(20,99,33,0.1)] flex items-center justify-center text-[#146321] mb-6 group-hover:scale-110 transition-transform duration-500">
-                     {service.icon}
-                   </div>
-                   <h3 className="text-xl md:text-2xl font-bold mb-3 font-[family-name:var(--font-heading)]">{service.title}</h3>
-                   <p className="text-[#475569] text-sm leading-relaxed mb-6 flex-grow">
-                     {service.description}
-                   </p>
-                   <div className="space-y-2.5 pt-5 border-t border-[rgba(20,99,33,0.1)]">
-                      {service.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-[#1E293B]">
-                          <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] shrink-0" />
-                          {feature}
-                        </div>
-                      ))}
-                   </div>
+          {/* Cards grid — reference style: tall image, title, desc, pill+circle button */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20 md:gap-x-10 md:gap-y-24">
+            {allServices.map((svc, i) => (
+              <div key={i} className="flex flex-col group/card transition-all duration-500">
+                {/* ── Image — tall, rounded, zoom on hover ── */}
+                <div className="relative w-full overflow-hidden mb-6 aspect-[4/3.5] rounded-[24px]" style={{marginBottom:"20px"}}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={svc.image}
+                    alt={svc.title}
+                    className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover/card:scale-105"
+                  />
+                </div>
+
+                {/* ── Title ── */}
+                <h3 className="font-medium text-[#146321] mb-6 text-2xl leading-snug transition-colors duration-500" style={{marginBottom:"20px"}}>
+                  {svc.title}
+                </h3>
+
+                {/* ── Description ── */}
+                <p className="text-[#146321] text-[1rem] leading-relaxed mb-10 flex-grow transition-colors duration-500"style={{marginBottom:"20px"}}>
+                  {svc.description}
+                </p>
+
+                {/* ── View Details — magnetic pill + filled circle arrow ── */}
+                <div className="mt-auto">
+                  <MagneticButton
+                    href={svc.href}
+                    variant="primary"
+                    className="group/btn group-hover/card:!bg-[#146321] hover:!bg-[#146321] transition-all duration-500 ease-in-out !border !border-[#146321]/10 !py-2 !px-2 !pl-5 inline-flex flex-row items-center gap-2 shadow-sm group-hover/card:shadow-[0_8px_30px_rgba(20,99,33,0.3)] hover:shadow-[0_8px_30px_rgba(20,99,33,0.3)] !rounded-full !bg-white"
+                    style={{ display: 'inline-flex', alignItems: 'center', flexDirection: 'row' }}
+                  >
+                    <span className="font-semibold text-[#1E293B] group-hover/card:text-white group-hover/btn:text-white transition-all duration-500 ease-in-out text-[0.95rem]" style={{ whiteSpace: 'nowrap', lineHeight: '1' }}>
+                      View Details
+                    </span>
+                    <span className="shrink-0 rounded-full flex items-center justify-center transition-all duration-500 ease-in-out bg-[#146321] group-hover/card:bg-white group-hover/btn:bg-white" style={{ width: '48px', height: '48px', minWidth: '48px', minHeight: '48px' }}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-white group-hover/card:text-[#146321] group-hover/btn:text-[#146321] transition-all duration-500 ease-in-out group-hover/card:rotate-45 group-hover/btn:rotate-45"
+                      >
+                        <line x1="7" y1="17" x2="17" y2="7" />
+                        <polyline points="7 7 17 7 17 17" />
+                      </svg>
+                    </span>
+                  </MagneticButton>
                 </div>
               </div>
             ))}
@@ -131,34 +227,135 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Workflow Section */}
-      <section className="py-16 md:py-24 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 md:mb-16">
-            <h2
-              className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-heading)] mb-3"
-              style={{ lineHeight: 1.15 }}
-            >
-              How We Work
+      {/* ── HOW WE WORK ────────────────────────────────────────────────────── */}
+      <section
+        className="relative bg-white overflow-hidden z-10 w-full"
+        style={{
+          paddingTop: "clamp(10px, 12vh, 150px)",
+          paddingBottom: "clamp(100px, 12vh, 150px)",
+          
+        }}
+      >
+        <div className="section-container relative z-10">
+
+          {/* Section heading */}
+          <div className="flex flex-col items-center text-center mb-20 md:mb-28" style={{marginBottom:"30px"}}>
+            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#146321]/10 border border-[#146321]/20 text-xs font-bold text-[#146321] tracking-[0.15em] uppercase mb-8" style={{marginBottom:"30px"}}>
+              Our Process
+            </span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-8 text-[#1E293B] leading-[1.15]"style={{marginBottom:"30px"}}>
+              How We <span className="text-[#146321]">Work</span>
             </h2>
-            <p className="text-[#475569] text-sm md:text-base">A streamlined process from initial consultation to final delivery.</p>
+            <p className="text-base md:text-lg text-[#475569] max-w-3xl leading-relaxed">
+              A streamlined, technology-driven process from initial consultation
+              to final data handover, ensuring total project success.
+            </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-             {[
-               { icon: <Fullscreen className="text-[#146321]" />, title: "Discovery", desc: "Understanding project goals and technical requirements." },
-               { icon: <Workflow className="text-[#146321]" />, title: "Strategy", desc: "Developing a custom BIM Execution Plan (BEP)." },
-               { icon: <Building2 className="text-[#146321]" />, title: "Execution", desc: "High-precision modeling and rigorous coordination." },
-               { icon: <CheckCircle2 className="text-[#146321]" />, title: "Delivery", desc: "Final quality checks and seamless data handover." }
-             ].map((step, i) => (
-               <div key={i} className="glass p-6 md:p-8 rounded-2xl md:rounded-3xl text-center flex flex-col items-center group hover:bg-[#146321]/5 transition-colors">
-                  <div className="w-12 h-12 rounded-full bg-[rgba(20,99,33,0.05)] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                     {step.icon}
+          {/* Steps grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12" style={{marginTop:"30px"}}>
+            {[
+              {
+                icon: <Fullscreen size={40} className="text-[#146321] group-hover:text-white transition-colors" />,
+                title: "Discovery",
+                desc: "Understanding project goals and technical requirements through an in-depth deep dive.",
+              },
+              {
+                icon: <Workflow size={32} className="text-[#146321] group-hover:text-white transition-colors" />,
+                title: "Strategy",
+                desc: "Developing a custom and robust BIM Execution Plan (BEP) tailored to your project.",
+              },
+              {
+                icon: <Building2 size={32} className="text-[#146321] group-hover:text-white transition-colors" />,
+                title: "Execution",
+                desc: "High-precision modeling, clash detection, and rigorous multi-trade coordination.",
+              },
+              {
+                icon: <CheckCircle2 size={32} className="text-[#146321] group-hover:text-white transition-colors" />,
+                title: "Delivery",
+                desc: "Final quality checks and seamless native data handover to your team.",
+              },
+            ].map((step, i) => (
+              <div key={i} className="group flex flex-col h-full" >
+                <div className="bg-white border border-[#146321]/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-xl rounded-3xl p-10 lg:p-12 text-center flex flex-col items-center h-full transition-all duration-500 hover:-translate-y-2" style={{ minHeight: '280px' }}>
+                  <div className="w-24 h-24 shrink-0 rounded-full bg-[#146321]/5 border border-[#146321]/10 flex items-center justify-center mb-10 group-hover:scale-110 group-hover:bg-[#146321] transition-all duration-500" style={{marginBottom:"30px", marginTop:"10px"}}>
+                    {step.icon}
                   </div>
-                  <h4 className="font-bold text-base md:text-lg mb-2">{step.title}</h4>
-                  <p className="text-xs md:text-sm text-[#475569] leading-relaxed">{step.desc}</p>
-               </div>
-             ))}
+                  <h4 className="font-bold text-xl md:text-2xl text-[#1E293B] mb-5 leading-tight"style={{marginBottom:"10px"}}>
+                    {step.title}
+                  </h4>
+                  <p className="text-base text-[#64748B] leading-relaxed flex-grow">
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── GET IN TOUCH - PARALLAX SECTION ────────────────────────────────── */}
+      <section className="relative w-full h-screen overflow-hidden">
+        {/* Fixed Background Image with Parallax */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url("/services/const.jpg")',
+            backgroundAttachment: 'fixed',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+          }}
+        >
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+
+        {/* Content Overlay */}
+        <div className="relative z-10 h-full flex items-center">
+          <div className="section-container w-full">
+            <div className="max-w-3xl">
+              <span className="inline-block text-sm font-semibold text-[#D4AF37] tracking-widest uppercase mb-6">
+                [Get in Touch]
+              </span>
+              
+              <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 leading-[1.1]" style={{ color: '#ffffff', textShadow: '0 4px 20px rgba(0,0,0,0.5), 0 2px 10px rgba(0,0,0,0.3)' }}>
+                Ready to Get{" "}
+                <span className="font-serif italic" style={{ fontFamily: "Georgia, serif", color: '#ffffff' }}>
+                  Started
+                </span>
+              </h2>
+              
+              <p className="text-white/90 text-lg md:text-xl leading-relaxed max-w-2xl" style={{ marginBottom: '40px' }}>
+                Let our expert team handle the hard work while you enjoy a beautiful project. Get in touch today for a free quote!
+              </p>
+
+              <MagneticButton
+                href="/contact"
+                variant="primary"
+                className="group/btn !bg-white hover:!bg-[#146321] transition-all duration-500 ease-in-out !border !border-[#146321]/10 !py-3 !px-3 !pl-8 inline-flex flex-row items-center gap-3 shadow-sm hover:shadow-[0_8px_30px_rgba(20,99,33,0.3)] !rounded-full"
+                style={{ display: 'inline-flex', alignItems: 'center', flexDirection: 'row' }}
+              >
+                <span className="font-semibold text-[#1E293B] group-hover/btn:text-white transition-all duration-500 ease-in-out text-[1.1rem]" style={{ whiteSpace: 'nowrap', lineHeight: '1' }}>
+                  Contact Us
+                </span>
+                <span className="shrink-0 rounded-full flex items-center justify-center transition-all duration-500 ease-in-out bg-[#146321] group-hover/btn:bg-white" style={{ width: '56px', height: '56px', minWidth: '56px', minHeight: '56px' }}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-white group-hover/btn:text-[#146321] transition-all duration-500 ease-in-out group-hover/btn:rotate-45"
+                  >
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                </span>
+              </MagneticButton>
+            </div>
           </div>
         </div>
       </section>

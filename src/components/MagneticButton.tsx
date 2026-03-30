@@ -54,12 +54,12 @@ export default function MagneticButton({
       className="inline-block"
     >
       {href ? (
-        <Link href={href} className={`${baseClass} ${className}`}>
-          <span>{children}</span>
+        <Link href={href} className={`${baseClass} ${className}`} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          {children}
         </Link>
       ) : (
-        <button onClick={onClick} className={`${baseClass} ${className}`}>
-          <span>{children}</span>
+        <button onClick={onClick} className={`${baseClass} ${className}`} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          {children}
         </button>
       )}
     </div>
