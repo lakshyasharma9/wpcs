@@ -9,6 +9,7 @@ interface MagneticButtonProps {
   onClick?: () => void;
   className?: string;
   variant?: "primary" | "outline" | "gold";
+  style?: React.CSSProperties;
 }
 
 export default function MagneticButton({
@@ -17,6 +18,7 @@ export default function MagneticButton({
   onClick,
   className = "",
   variant = "primary",
+  style,
 }: MagneticButtonProps) {
   const btnRef = useRef<HTMLDivElement>(null);
 
@@ -54,11 +56,11 @@ export default function MagneticButton({
       className="inline-block"
     >
       {href ? (
-        <Link href={href} className={`${baseClass} ${className}`} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+        <Link href={href} className={`${baseClass} ${className}`} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', ...style }}>
           {children}
         </Link>
       ) : (
-        <button onClick={onClick} className={`${baseClass} ${className}`} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+        <button onClick={onClick} className={`${baseClass} ${className}`} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', ...style }}>
           {children}
         </button>
       )}
