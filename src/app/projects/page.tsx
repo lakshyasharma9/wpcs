@@ -87,10 +87,10 @@ export default function ProjectsPage() {
     : projects.filter(p => p.category === filter);
 
   return (
-    <div className="pt-24 md:pt-28 min-h-screen bg-[#F8FAF8] pb-16 md:pb-24">
-      <section className="px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 md:mb-16">
+    <div className="min-h-screen bg-[#F8FAF8]" style={{ paddingTop: 'clamp(140px, 18vh, 180px)', paddingBottom: 'clamp(80px, 10vh, 120px)' }}>
+      <section style={{ paddingLeft: 'clamp(40px, 8vw, 120px)', paddingRight: 'clamp(40px, 8vw, 120px)', marginBottom: 'clamp(80px, 12vh, 120px)' }}>
+        <div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8" style={{ marginBottom: 'clamp(56px, 9vh, 80px)' }}>
             <div className="max-w-2xl">
               <span className="inline-block text-xs font-bold text-[#146321] tracking-[0.18em] uppercase mb-4">
                 Our Portfolio
@@ -119,7 +119,7 @@ export default function ProjectsPage() {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-2 md:gap-3 mb-8 md:mb-10">
+          <div className="flex flex-wrap gap-2 md:gap-3" style={{ marginBottom: 'clamp(48px, 7vh, 64px)' }}>
             {portfolioCategories.map((cat) => (
               <button
                 key={cat}
@@ -137,7 +137,8 @@ export default function ProjectsPage() {
 
           <div
             ref={projectsRef}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7"
+            className="grid sm:grid-cols-2 lg:grid-cols-3"
+            style={{ gap: 'clamp(28px, 3.5vw, 40px)' }}
           >
             {projects.map((project) => (
               <div
@@ -178,8 +179,8 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      <section className="px-4 sm:px-6 lg:px-8 pb-8">
-         <div className="max-w-7xl mx-auto glass rounded-2xl md:rounded-3xl p-8 sm:p-12 md:p-16 relative overflow-hidden text-center">
+      <section style={{ paddingLeft: 'clamp(40px, 8vw, 120px)', paddingRight: 'clamp(40px, 8vw, 120px)' }}>
+         <div className="glass rounded-2xl md:rounded-3xl relative overflow-hidden text-center" style={{ padding: 'clamp(56px, 9vw, 96px) clamp(40px, 6vw, 72px)' }}>
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#146321] opacity-5 rounded-full blur-3xl" />
             <h2
               className="text-3xl md:text-4xl lg:text-5xl font-bold font-[family-name:var(--font-heading)] mb-4 text-[#1E293B]"

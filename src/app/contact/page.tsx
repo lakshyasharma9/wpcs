@@ -14,7 +14,8 @@ import {
   CheckCircle,
   Linkedin,
   Twitter,
-  Instagram
+  Instagram,
+  Youtube
 } from "lucide-react";
 import MagneticButton from "@/components/MagneticButton";
 
@@ -25,11 +26,12 @@ const FloatingShapes = dynamic(() => import("@/components/FloatingShapes"), {
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     company: "",
-    service: "BIM Modeling",
+    service: [] as string[],
     message: ""
   });
 
@@ -44,6 +46,25 @@ export default function ContactPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const toggleService = (serviceName: string) => {
+    const currentServices = formData.service as string[];
+    if (currentServices.includes(serviceName)) {
+      setFormData({ ...formData, service: currentServices.filter(s => s !== serviceName) });
+    } else {
+      setFormData({ ...formData, service: [...currentServices, serviceName] });
+    }
+  };
+
+  const services = [
+    "BIM (MEPF)",
+    "Prefabrication",
+    "Estimation",
+    "Renderings",
+    "Submittals Review",
+    "Project Management",
+    "Drone Video"
+  ];
 
   if (submitted) {
     return (
@@ -61,39 +82,40 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="pt-24 md:pt-28 min-h-screen bg-[#F8FAF8] pb-12 md:pb-16">
+    <div className="min-h-screen bg-[#F8FAF8]" style={{ paddingTop: 'clamp(200px, 15vh, 160px)', paddingBottom: 'clamp(80px, 12vh, 120px)' }}>
       <div className="absolute inset-0 z-0 opacity-20 h-[600px]">
-        <FloatingShapes />
+        
       </div>
 
-      <section className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-2xl mb-12 md:mb-16">
-            <span className="inline-block text-xs font-bold text-[#146321] tracking-[0.18em] uppercase mb-4">
-              Get in Touch
-            </span>
-            <h1
-              className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-5 font-[family-name:var(--font-heading)]"
-              style={{ lineHeight: 1.1, letterSpacing: "-0.02em" }}
-            >
-              Let&apos;s Build Something <br />
-              <span className="text-[#146321]">Great Together</span>
-            </h1>
-            <p className="text-base md:text-lg text-[#475569]" style={{ lineHeight: 1.75, maxWidth: "560px" }}>
-              Ready to transform your next project with cutting-edge construction
-              technology? We&apos;re here to help you innovate.
-            </p>
-          </div>
+      <section className="relative z-10">
+        <div className="section-container">
+          <div className="grid lg:grid-cols-12" style={{ gap: 'clamp(48px, 8vw, 100px)', marginBottom: 'clamp(60px, 10vh, 100px)' }}>
+            {/* Left Side - Heading + Contact Info */}
+            <div className="lg:col-span-5">
+              <div className="max-w-2xl" style={{ marginBottom: 'clamp(48px, 8vh, 80px)' }}>
+                <span className="inline-block text-xs font-bold text-[#146321] tracking-[0.18em] uppercase" style={{ marginBottom: 'clamp(20px, 3vh, 28px)' }}>
+                  Get in Touch
+                </span>
+                <h1
+                  className="text-4xl sm:text-5xl md:text-6xl font-extrabold font-[family-name:var(--font-heading)]"
+                  style={{ lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: 'clamp(24px, 4vh, 36px)' }}
+                >
+                  Let&apos;s Build Something <br />
+                  <span className="text-[#146321]">Great Together</span>
+                </h1>
+                <p className="text-base md:text-lg text-[#475569]" style={{ lineHeight: 1.75, maxWidth: "560px" }}>
+                  Ready to transform your next project with cutting-edge construction
+                  technology? We&apos;re here to help you innovate.
+                </p>
+              </div>
 
-          <div className="grid lg:grid-cols-12 gap-10 xl:gap-16">
-          <div className="lg:col-span-5 space-y-8 md:space-y-10">
-               <div className="space-y-6 md:space-y-8">
-                  <div className="flex gap-5 items-start group">
-                     <div className="w-12 h-12 rounded-xl glass flex items-center justify-center text-[#146321] group-hover:scale-110 transition-transform duration-500 shrink-0">
-                        <MapPin size={22} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(36px, 5vh, 56px)' }}>
+                  <div className="flex gap-6 items-start group">
+                     <div className="w-16 h-16 rounded-xl glass flex items-center justify-center text-[#146321] group-hover:scale-110 transition-transform duration-500 shrink-0">
+                        <MapPin size={26} />
                      </div>
                      <div>
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] mb-1.5">Our Office</h4>
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]" style={{ marginBottom: '12px' }}>Our Office</h4>
                         <p className="text-[#1E293B] font-medium leading-relaxed text-sm md:text-base">
                           West Palm Beach Headquarters<br />
                           1200 Lakeview Avenue, Suite 400<br />
@@ -102,57 +124,57 @@ export default function ContactPage() {
                      </div>
                   </div>
 
-                  <div className="flex gap-5 items-start group">
-                     <div className="w-12 h-12 rounded-xl glass flex items-center justify-center text-[#146321] group-hover:scale-110 transition-transform duration-500 shrink-0">
-                        <Phone size={22} />
+                  <div className="flex gap-6 items-start group">
+                     <div className="w-16 h-16 rounded-xl glass flex items-center justify-center text-[#146321] group-hover:scale-110 transition-transform duration-500 shrink-0">
+                        <Phone size={26} />
                      </div>
                      <div>
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] mb-1.5">Call Us</h4>
-                        <p className="text-[#1E293B] font-medium text-sm md:text-base">+1 (561) 555-0123</p>
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]" style={{ marginBottom: '12px' }}>Call Us</h4>
+                        <p className="text-[#1E293B] font-medium text-sm md:text-base" style={{ marginBottom: '6px' }}>+1 (561) 555-0123</p>
                         <p className="text-xs md:text-sm text-[#475569]">Mon - Fri, 8am - 6pm EST</p>
                      </div>
                   </div>
 
-                  <div className="flex gap-5 items-start group">
-                     <div className="w-12 h-12 rounded-xl glass flex items-center justify-center text-[#146321] group-hover:scale-110 transition-transform duration-500 shrink-0">
-                        <Mail size={22} />
+                  <div className="flex gap-6 items-start group">
+                     <div className="w-16 h-16 rounded-xl glass flex items-center justify-center text-[#146321] group-hover:scale-110 transition-transform duration-500 shrink-0">
+                        <Mail size={26} />
                      </div>
                      <div>
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] mb-1.5">Email</h4>
-                        <p className="text-[#1E293B] font-medium underline text-sm md:text-base">projects@wpcs.com</p>
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]" style={{ marginBottom: '12px' }}>Email</h4>
+                        <p className="text-[#1E293B] font-medium underline text-sm md:text-base" style={{ marginBottom: '6px' }}>projects@wpcs.com</p>
                         <p className="text-xs md:text-sm text-[#475569]">Typically response within 2 hours</p>
                      </div>
                   </div>
                </div>
 
-               <div className="pt-6 border-t border-[rgba(20,99,33,0.1)]">
-                 <h4 className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] mb-4">Social Networks</h4>
-                 <div className="flex gap-3">
-                    {[Linkedin, Twitter, Instagram].map((Icon, i) => (
-                      <a key={i} href="#" className="w-11 h-11 rounded-full glass flex items-center justify-center text-[#1E293B] hover:bg-[#146321] hover:text-white transition-all duration-300">
-                        <Icon size={18} />
-                      </a>
-                    ))}
+               <div style={{ paddingTop: 'clamp(36px, 6vh, 56px)', borderTop: '1px solid rgba(20,99,33,0.1)', marginTop: 'clamp(36px, 6vh, 56px)' }}>
+                 <h4 className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]" style={{ marginBottom: '20px' }}>Social Networks</h4>
+                 <div className="flex gap-4">
+                    <a href="https://www.linkedin.com/company/89331237/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full flex items-center justify-center text-[#1E293B] bg-white/70 backdrop-blur-sm border border-[rgba(20,99,33,0.2)] hover:!bg-[#146321] hover:!text-white transition-all duration-300 hover:scale-110">
+                      <Linkedin size={22} />
+                    </a>
+                    <a href="#" className="w-14 h-14 rounded-full flex items-center justify-center text-[#1E293B] bg-white/70 backdrop-blur-sm border border-[rgba(20,99,33,0.2)] hover:!bg-[#146321] hover:!text-white transition-all duration-300 hover:scale-110">
+                      <Twitter size={22} />
+                    </a>
+                    <a href="#" className="w-14 h-14 rounded-full flex items-center justify-center text-[#1E293B] bg-white/70 backdrop-blur-sm border border-[rgba(20,99,33,0.2)] hover:!bg-[#146321] hover:!text-white transition-all duration-300 hover:scale-110">
+                      <Instagram size={22} />
+                    </a>
+                    <a href="https://www.youtube.com/@WestPalmConsultants" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full flex items-center justify-center text-[#1E293B] bg-white/70 backdrop-blur-sm border border-[rgba(20,99,33,0.2)] hover:!bg-[#146321] hover:!text-white transition-all duration-300 hover:scale-110">
+                      <Youtube size={22} />
+                    </a>
                  </div>
-               </div>
-
-               <div className="hidden lg:block glass rounded-2xl md:rounded-3xl h-[240px] w-full relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#146321]/10 to-[#D4AF37]/5" />
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center opacity-40 group-hover:opacity-60 transition-opacity">
-                     <Building size={70} className="mx-auto mb-3 text-[#146321]" />
-                     <p className="text-xs uppercase tracking-[0.2em] font-bold">Interactive Location Map</p>
-                  </div>
                </div>
             </div>
 
+            {/* Right Side - Form */}
             <div className="lg:col-span-7">
-               <div className="glass bg-white p-6 sm:p-8 md:p-10 rounded-2xl md:rounded-[32px] shadow-2xl relative">
+               <div className="glass bg-white rounded-2xl md:rounded-[32px] shadow-2xl relative" style={{ padding: 'clamp(32px, 5vw, 56px)' }}>
                   <div className="absolute top-0 right-0 p-6 opacity-5">
                     <Send size={120} />
                   </div>
 
-                  <form onSubmit={handleSubmit} className="relative z-10 space-y-7">
-                     <div className="grid sm:grid-cols-2 gap-7">
+                  <form onSubmit={handleSubmit} className="relative z-10" style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(28px, 4vh, 40px)' }}>
+                     <div className="grid sm:grid-cols-2" style={{ gap: 'clamp(24px, 3vw, 36px)' }}>
                         <div className="float-label-group">
                           <input type="text" name="name" id="name" placeholder=" " required value={formData.name} onChange={handleChange} />
                           <label htmlFor="name">Full Name</label>
@@ -163,63 +185,103 @@ export default function ContactPage() {
                         </div>
                      </div>
 
-                     <div className="grid sm:grid-cols-2 gap-7">
+                     <div className="grid sm:grid-cols-2" style={{ gap: 'clamp(24px, 3vw, 36px)' }}>
                         <div className="float-label-group">
                           <input type="text" name="company" id="company" placeholder=" " value={formData.company} onChange={handleChange} />
                           <label htmlFor="company">Company Name</label>
                         </div>
-                        <div className="float-label-group">
-                           <select id="service" name="service" value={formData.service} onChange={handleChange} className="appearance-none">
-                              <option value="BIM Modeling">BIM Modeling</option>
-                              <option value="VDC Coordination">VDC Coordination</option>
-                              <option value="Quantity Take-Off">Quantity Take-Off</option>
-                              <option value="Prefabrication">Prefabrication</option>
-                              <option value="3D Rendering">3D Rendering</option>
-                              <option value="Administrative">Other Inquiry</option>
-                           </select>
-                           <label htmlFor="service">Interest Area</label>
-                           <ChevronDown className="absolute right-0 top-4 pointer-events-none text-[#475569]" size={16} />
+                        <div className="float-label-group relative">
+                          <div 
+                            className="w-full cursor-pointer"
+                            onClick={() => setIsServiceDropdownOpen(!isServiceDropdownOpen)}
+                          >
+                            <input 
+                              type="text" 
+                              id="service" 
+                              placeholder=" " 
+                              value={(formData.service as string[]).join(', ')}
+                              readOnly
+                              className="cursor-pointer"
+                            />
+                            <label htmlFor="service">Services</label>
+                          </div>
+                          {isServiceDropdownOpen && (
+                            <div className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-[#146321]/20 rounded-xl shadow-xl z-50 max-h-64 overflow-y-auto">
+                              {services.map((service, idx) => (
+                                <div
+                                  key={idx}
+                                  className="flex items-center gap-3 px-4 py-3 hover:bg-[#146321]/5 cursor-pointer transition-colors"
+                                  onClick={() => toggleService(service)}
+                                >
+                                  <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
+                                    (formData.service as string[]).includes(service) 
+                                      ? 'bg-[#146321] border-[#146321]' 
+                                      : 'border-[#146321]/30'
+                                  }`}>
+                                    {(formData.service as string[]).includes(service) && (
+                                      <CheckCircle size={14} className="text-white" strokeWidth={3} />
+                                    )}
+                                  </div>
+                                  <span className="text-sm font-medium text-[#1E293B]">{service}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                      </div>
 
                      <div className="float-label-group">
-                        <textarea id="message" name="message" rows={4} placeholder=" " required value={formData.message} onChange={handleChange} />
+                        <textarea id="message" name="message" rows={5} placeholder=" " required value={formData.message} onChange={handleChange} />
                         <label htmlFor="message">Your Message</label>
                      </div>
 
-                     <div className="space-y-3">
+                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                         <h4 className="text-xs font-bold uppercase tracking-widest text-[#475569]">Attachments (Optional)</h4>
-                        <div className="dropzone border-2 border-dashed border-[rgba(20,99,33,0.1)] rounded-xl p-6 flex flex-col items-center justify-center gap-2 hover:border-[#146321] hover:bg-white/50 transition-all cursor-pointer group">
-                           <div className="w-11 h-11 rounded-xl bg-[rgba(20,99,33,0.05)] flex items-center justify-center text-[#146321] group-hover:scale-110 transition-transform">
-                              <UploadCloud size={22} />
+                        <div className="dropzone border-2 border-dashed border-[rgba(20,99,33,0.1)] rounded-xl flex flex-col items-center justify-center hover:border-[#146321] hover:bg-white/50 transition-all cursor-pointer group" style={{ padding: 'clamp(24px, 4vh, 36px)', gap: '12px' }}>
+                           <div className="w-14 h-14 rounded-xl bg-[rgba(20,99,33,0.05)] flex items-center justify-center text-[#146321] group-hover:scale-110 transition-transform">
+                              <UploadCloud size={26} />
                            </div>
                            <p className="text-sm font-semibold">Drop project specs here or <span className="text-[#146321]">browse</span></p>
                            <p className="text-[10px] text-[#94a3b8] uppercase tracking-wide">PDF, ZIP, DOCX (Max 25MB)</p>
                         </div>
                      </div>
 
-                     <div className="pt-2">
+                     <div style={{ paddingTop: 'clamp(12px, 2vh, 20px)' }}>
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full relative py-4 bg-[#146321] text-white rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-[#0A3B12] transition-colors disabled:opacity-70 group shadow-lg"
+                          className="w-full relative bg-[#146321] text-white rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-[#0A3B12] transition-colors disabled:opacity-70 group shadow-lg text-base"
+                          style={{ padding: 'clamp(16px, 2.5vh, 22px) 24px' }}
                         >
                           {isSubmitting ? (
                             <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                           ) : (
                             <>
                               Send Inquiry
-                              <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                              <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                             </>
                           )}
                         </button>
-                        <p className="text-center text-[10px] text-[#94a3b8] mt-3 uppercase tracking-widest">
+                        <p className="text-center text-[10px] text-[#94a3b8] uppercase tracking-widest" style={{ marginTop: '16px' }}>
                           Secure end-to-end encryption for all inquiries
                         </p>
                      </div>
                   </form>
                </div>
             </div>
+          </div>
+
+          {/* Full Width Map Section */}
+          <div className="glass rounded-2xl md:rounded-3xl w-full relative overflow-hidden" style={{ height: 'clamp(400px, 50vh, 600px)' }}>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.123456789!2d75.78728137351014!3d26.91246193074616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDU0JzQ0LjkiTiA3NcKwNDcnMTQuMiJF!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </section>
