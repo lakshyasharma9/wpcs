@@ -23,12 +23,23 @@ const achievements = [
 ];
 
 const events = [
-  { title: "Construction Tech Summit 2024", date: "March 15, 2024", location: "Miami, FL", image: "/about/team.jpg" },
-  { title: "BIM Innovation Conference", date: "April 22, 2024", location: "Orlando, FL", image: "/about/team.jpg" },
-  { title: "Digital Construction Expo", date: "May 10, 2024", location: "Tampa, FL", image: "/about/team.jpg" },
-  { title: "VDC Workshop Series", date: "June 5, 2024", location: "West Palm Beach, FL", image: "/about/team.jpg" },
-  { title: "Smart Building Forum", date: "July 18, 2024", location: "Jacksonville, FL", image: "/about/team.jpg" },
-  { title: "AEC Technology Showcase", date: "August 12, 2024", location: "Fort Lauderdale, FL", image: "/about/team.jpg" },
+  { image: "/event/1.jpg" },
+  { image: "/event/2.jpg" },
+  { image: "/event/3.jpg" },
+  { image: "/event/4.jpg" },
+  { image: "/event/5.jpg" },
+  { image: "/event/6.jpg" },
+  { image: "/event/7.jpg" },
+  { image: "/event/8.jpg" },
+  { image: "/event/9.jpg" },
+  { image: "/event/10.jpg" },
+  { image: "/event/12.jpg" },
+  { image: "/event/13.jpg" },
+  { image: "/event/14.jpeg" },
+  { image: "/event/15.jpeg" },
+  { image: "/event/16.jpg" },
+  { image: "/event/17.jpg" },
+  { image: "/event/18.jpg" },
 ];
 
 const services = [
@@ -481,32 +492,18 @@ export default function AboutPage() {
           <div className="overflow-hidden">
             <div className="flex gap-6 animate-scroll-seamless" style={{ width: 'max-content' }}>
               {/* Duplicate events multiple times for seamless infinite loop */}
-              {[...events, ...events, ...events, ...events].map((event, i) => (
+              {[...events, ...events, ...events].map((event, i) => (
                 <div
                   key={`event-${i}`}
                   className="flex-shrink-0 w-[420px] bg-white rounded-2xl overflow-hidden shadow-lg border border-[#146321]/10 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
                 >
-                  <div className="relative h-[280px]">
+                  <div className="relative h-[450px]">
                     <Image
                       src={event.image}
-                      alt={event.title}
+                      alt={`Event ${i + 1}`}
                       fill
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-lg font-bold text-[#1E293B] mb-2 font-[family-name:var(--font-heading)]">
-                      {event.title}
-                    </h3>
-                    <div className="flex items-center gap-2 text-sm text-[#475569] mb-2">
-                      <Calendar size={14} className="text-[#146321]" />
-                      <span>{event.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-[#475569]">
-                      <Building2 size={14} className="text-[#146321]" />
-                      <span>{event.location}</span>
-                    </div>
                   </div>
                 </div>
               ))}

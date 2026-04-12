@@ -20,7 +20,7 @@
   --font-body: 'Inter', sans-serif;
 }
 
-/* ===== BASE STYLES ===== */
+/* resets */
 * {
   margin: 0;
   padding: 0;
@@ -49,7 +49,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
 }
 
-/* ===== SCROLLBAR ===== */
+/* hide scrollbars */
 ::-webkit-scrollbar {
   width: 0px;
   display: none;
@@ -78,7 +78,7 @@ body {
   -ms-overflow-style: none;
 }
 
-/* ===== CUSTOM CURSOR ===== */
+/* mouse cursors */
 .cursor-dot {
   width: 8px;
   height: 8px;
@@ -113,7 +113,7 @@ body {
   background: rgba(20, 99, 33, 0.1);
 }
 
-/* ===== GLASSMORPHISM ===== */
+/* ui glass */
 .glass {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
@@ -128,7 +128,7 @@ body {
   border: 1px solid rgba(20, 99, 33, 0.3);
 }
 
-/* ===== MAGNETIC BUTTON ===== */
+/* magnetic effect - buttons */
 .magnetic-btn {
   position: relative;
   display: inline-flex;
@@ -172,7 +172,7 @@ body {
   z-index: 1;
 }
 
-/* ===== MARQUEE ===== */
+/* marquee */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -186,7 +186,7 @@ body {
   animation-play-state: paused;
 }
 
-/* ===== CONTINUOUS SCROLL ===== */
+/* inf scroll */
 @keyframes scroll-seamless {
   0% { transform: translateX(0); }
   100% { transform: translateX(calc(-100% / 4)); }
@@ -201,14 +201,14 @@ body {
   animation-play-state: paused;
 }
 
-/* ===== TEXT REVEAL ===== */
+/* text reveal */
 .char-reveal .char {
   display: inline-block;
   opacity: 0;
   transform: translateY(40px);
 }
 
-/* ===== IMAGE SCALE ===== */
+/* img zoom hover */
 .img-scale {
   overflow: hidden;
 }
@@ -222,7 +222,7 @@ body {
   transform: scale(1);
 }
 
-/* ===== NAV LINK ANIMATION ===== */
+/* nav underlines */
 .nav-link {
   position: relative;
   text-decoration: none;
@@ -251,7 +251,7 @@ body {
   background: #D4AF37;
 }
 
-/* ===== FLOATING LABEL ===== */
+/* form inputs float label */
 .float-label-group {
   position: relative;
 }
@@ -297,19 +297,19 @@ body {
   font-weight: 600;
 }
 
-/* ===== TILT CARD ===== */
+/* tilt */
 .tilt-card {
   transform-style: preserve-3d;
   transition: transform 0.1s ease;
 }
 
-/* ===== TIMELINE ===== */
+/* svg timeline */
 .timeline-line {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
 }
 
-/* ===== FILE DROPZONE ===== */
+/* upload box */
 .dropzone {
   border: 2px dashed rgba(20, 99, 33, 0.3);
   border-radius: 12px;
@@ -417,7 +417,7 @@ body {
   }
 }
 
-/* ===== SELECTION ===== */
+/* selection color */
 ::selection {
   background: rgba(20, 99, 33, 0.2);
   color: var(--color-primary-dark);

@@ -22,7 +22,7 @@ export default function MagneticButton({
 }: MagneticButtonProps) {
   const btnRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const onMove = (e: React.MouseEvent) => {
     const btn = btnRef.current;
     if (!btn) return;
     const rect = btn.getBoundingClientRect();
@@ -31,11 +31,12 @@ export default function MagneticButton({
     btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
   };
 
-  const handleMouseLeave = () => {
+  const reset = () => {
     const btn = btnRef.current;
     if (!btn) return;
     btn.style.transform = "translate(0px, 0px)";
     btn.style.transition = "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+    // btn.style.transition = 'none'; // this causes a flicker bug, keep bezier
     setTimeout(() => {
       if (btn) btn.style.transition = "";
     }, 500);
@@ -51,10 +52,11 @@ export default function MagneticButton({
   const content = (
     <div
       ref={btnRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseMove={onMove}
+      onMouseLeave={reset}
       className="inline-block"
     >
+      {/* TODO: maybe extract link wrapper to its own subcomponent */}
       {href ? (
         <Link href={href} className={`${baseClass} ${className}`} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', ...style }}>
           {children}
