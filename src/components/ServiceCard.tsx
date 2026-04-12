@@ -23,7 +23,7 @@ export default function ServiceCard({
   const [transform, setTransform] = useState("");
   const [hovered, setHovered] = useState(false);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const onMouseMove = (e: React.MouseEvent) => {
     const card = cardRef.current;
     if (!card) return;
     const rect = card.getBoundingClientRect();
@@ -38,7 +38,7 @@ export default function ServiceCard({
     );
   };
 
-  const handleMouseLeave = () => {
+  const onMouseLeave = () => {
     setTransform("");
     setHovered(false);
   };
@@ -46,8 +46,8 @@ export default function ServiceCard({
   return (
     <div
       ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
       onMouseEnter={() => setHovered(true)}
       className="rounded-2xl"
       style={{

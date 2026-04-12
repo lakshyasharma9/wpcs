@@ -49,7 +49,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
 }
 
-/* hide scrollbars */
+/* scrollbar hide */
 ::-webkit-scrollbar {
   width: 0px;
   display: none;
@@ -78,7 +78,7 @@ body {
   -ms-overflow-style: none;
 }
 
-/* mouse cursors */
+/* cursor */
 .cursor-dot {
   width: 8px;
   height: 8px;
@@ -113,7 +113,7 @@ body {
   background: rgba(20, 99, 33, 0.1);
 }
 
-/* ui glass */
+/* glass */
 .glass {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
@@ -128,7 +128,7 @@ body {
   border: 1px solid rgba(20, 99, 33, 0.3);
 }
 
-/* magnetic effect - buttons */
+/* magnetic btn */
 .magnetic-btn {
   position: relative;
   display: inline-flex;
@@ -186,7 +186,7 @@ body {
   animation-play-state: paused;
 }
 
-/* inf scroll */
+/* seamless scroll */
 @keyframes scroll-seamless {
   0% { transform: translateX(0); }
   100% { transform: translateX(calc(-100% / 4)); }
@@ -201,14 +201,14 @@ body {
   animation-play-state: paused;
 }
 
-/* text reveal */
+/* char reveal */
 .char-reveal .char {
   display: inline-block;
   opacity: 0;
   transform: translateY(40px);
 }
 
-/* img zoom hover */
+/* img hover zoom */
 .img-scale {
   overflow: hidden;
 }
@@ -222,7 +222,7 @@ body {
   transform: scale(1);
 }
 
-/* nav underlines */
+/* nav */
 .nav-link {
   position: relative;
   text-decoration: none;
@@ -251,7 +251,7 @@ body {
   background: #D4AF37;
 }
 
-/* form inputs float label */
+/* float label */
 .float-label-group {
   position: relative;
 }
@@ -303,13 +303,13 @@ body {
   transition: transform 0.1s ease;
 }
 
-/* svg timeline */
+/* timeline */
 .timeline-line {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
 }
 
-/* upload box */
+/* dropzone */
 .dropzone {
   border: 2px dashed rgba(20, 99, 33, 0.3);
   border-radius: 12px;
@@ -325,6 +325,7 @@ body {
   background: rgba(20, 99, 33, 0.05);
 }
 
+/* section wrapper */
 /* section-container — consistent horizontal padding across all sections */
 .section-container {
   max-width: 1280px;

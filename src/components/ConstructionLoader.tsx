@@ -52,7 +52,7 @@ export default function ConstructionLoader() {
   const [progress, setProgress] = useState(0);
   const [visible, setVisible]   = useState(true);
 
-  // ── Phase 1: Tetris ─────────────────────────────────────────────────────────
+  // tetris drop
   useEffect(() => {
     if (phase !== "tetris") return;
 
@@ -81,7 +81,7 @@ export default function ConstructionLoader() {
     tl.to({}, { duration: 0.25 });
   }, [phase]);
 
-  // ── Phase 2: Icon cycling ───────────────────────────────────────────────────
+  // icon cycle after tetris
   useEffect(() => {
     if (phase !== "icons") return;
 
@@ -145,7 +145,7 @@ export default function ConstructionLoader() {
         display: "flex", alignItems: "center", justifyContent: "center",
       }}
     >
-      {/* Tetris phase */}
+      {/* tetris */}
       {phase === "tetris" && (
         <div
           ref={tetrisRef}
@@ -174,7 +174,7 @@ export default function ConstructionLoader() {
         </div>
       )}
 
-      {/* Icons phase */}
+      {/* icons */}
       {phase === "icons" && (
         <div style={{ position: "relative", width: 220, height: 220 }}>
           <ProgressRing progress={progress} />
@@ -185,7 +185,7 @@ export default function ConstructionLoader() {
             width: 80, height: 80,
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
-            {/* Ripple */}
+
             <div ref={rippleRef} style={{
               position: "absolute",
               width: 72, height: 72,
@@ -193,7 +193,7 @@ export default function ConstructionLoader() {
               border: "2px solid rgba(212,175,55,0.55)",
               pointerEvents: "none",
             }}/>
-            {/* Icon */}
+
             <div ref={iconRef} style={{
               display: "flex", alignItems: "center", justifyContent: "center",
               transformOrigin: "50% 50%",

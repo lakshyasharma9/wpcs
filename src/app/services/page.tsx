@@ -10,65 +10,12 @@ import {
 } from "lucide-react";
 import ServiceCard from "@/components/ServiceCard";
 import MagneticButton from "@/components/MagneticButton";
+import { services as allServices } from "@/data/services";
 
 const FloatingShapes = dynamic(() => import("@/components/FloatingShapes"), {
   ssr: false,
 });
 
-// ─── Services Data (matching ServiceCard component interface) ─────────────────
-const allServices = [
-  {
-    title: "BIM (MEPF)",
-    description:
-      "Comprehensive 3D Building Information Modeling for Mechanical, Electrical, Plumbing, and Fire Protection (MEPF) systems. We deliver clash-free, coordinated models to streamline your entire construction process.",
-    image: "/BIM(MEPF).png",
-    href: "/services/bim-mepf",
-  },
-  {
-    title: "Prefabrication",
-    description:
-      "Detailed modeling and accurate spool drawings designed to optimize off-site manufacturing, reduce waste, and accelerate on-site installation.",
-    image: "/Prefabrication.png",
-    href: "/services/prefabrication",
-  },
-  {
-    title: "Estimation",
-    description:
-      "Precise material take-offs and cost estimates to help you bid competitively, plan budgets accurately, and control project finances.",
-    image: "/Estimation.png",
-    href: "/services/estimation",
-  },
-  {
-    title: "Renderings",
-    description:
-      "High-quality, photorealistic 3D visualizations that bring your designs to life, helping stakeholders easily conceptualize the final build.",
-    image: "/Renderings.png",
-    href: "/services/renderings",
-  },
-  {
-    title: "Submittals Review",
-    description:
-      "Thorough evaluation of shop drawings, equipment data, and material specifications to ensure strict compliance with project standards and design intent.",
-    image: "/Submittals Review.png",
-    href: "/services/submittals-review",
-  },
-  {
-    title: "Project Management",
-    description:
-      "End-to-end project oversight, including schedule coordination, resource allocation, and workflow optimization to ensure on-time delivery.",
-    image: "/Project Management.png",
-    href: "/services/project-management",
-  },
-  {
-    title: "Drone Video",
-    description:
-      "High-resolution aerial videography for accurate site surveys, real-time construction progress tracking, and compelling marketing material.",
-    image: "/Drone Video.png",
-    href: "/services/drone-video",
-  },
-];
-
-// Shared container class — same on every section for equal L/R margins
 const CONTAINER = "w-full max-w-7xl mx-auto px-8 sm:px-12 lg:px-16";
 
 export default function ServicesPage() {
@@ -78,7 +25,7 @@ export default function ServicesPage() {
         <FloatingShapes />
       </div>
 
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
+      {/* hero */}
       <section className="relative w-full h-screen max-h-[1080px] min-h-[600px] overflow-hidden flex flex-col justify-center items-center text-center z-10">
         <style>{`
           @keyframes smoothZoom {
@@ -141,7 +88,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── SERVICES GRID ──────────────────────────────────────────────────── */}
+      {/* services grid */}
       <section
         className="relative bg-[#F8FAF8] z-10 w-full"
         style={{
@@ -151,7 +98,7 @@ export default function ServicesPage() {
       >
         <div className="section-container">
 
-          {/* Section heading — left margin from section-container, gap below */}
+
           <div className="mb-20 md:mb-28" style={{marginBottom:"50px"}}>
             <span className="block text-sm font-semibold text-[#146321] mb-3 uppercase tracking-widest">
               [Our Services]
@@ -167,11 +114,11 @@ export default function ServicesPage() {
             </h2>
           </div>
 
-          {/* Cards grid — reference style: tall image, title, desc, pill+circle button */}
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20 md:gap-x-10 md:gap-y-24">
             {allServices.map((svc, i) => (
               <div key={i} className="flex flex-col group/card transition-all duration-500">
-                {/* ── Image — tall, rounded, zoom on hover ── */}
+
                 <div className="relative w-full overflow-hidden mb-6 aspect-[4/3.5] rounded-[24px]" style={{marginBottom:"20px"}}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -181,17 +128,17 @@ export default function ServicesPage() {
                   />
                 </div>
 
-                {/* ── Title ── */}
+
                 <h3 className="font-medium text-[#146321] mb-6 text-2xl leading-snug transition-colors duration-500" style={{marginBottom:"20px"}}>
                   {svc.title}
                 </h3>
 
-                {/* ── Description ── */}
+
                 <p className="text-[#146321] text-[1rem] leading-relaxed mb-10 flex-grow transition-colors duration-500"style={{marginBottom:"20px"}}>
                   {svc.description}
                 </p>
 
-                {/* ── View Details — magnetic pill + filled circle arrow ── */}
+
                 <div className="mt-auto">
                   <MagneticButton
                     href={svc.href}
@@ -227,7 +174,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── HOW WE WORK ────────────────────────────────────────────────────── */}
+      {/* how we work */}
       <section
         className="relative bg-white overflow-hidden z-10 w-full"
         style={{
@@ -238,7 +185,7 @@ export default function ServicesPage() {
       >
         <div className="section-container relative z-10">
 
-          {/* Section heading */}
+
           <div className="flex flex-col items-center text-center mb-20 md:mb-28" style={{marginBottom:"30px"}}>
             <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#146321]/10 border border-[#146321]/20 text-xs font-bold text-[#146321] tracking-[0.15em] uppercase mb-8" style={{marginBottom:"30px"}}>
               Our Process
@@ -252,7 +199,7 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          {/* Steps grid */}
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12" style={{marginTop:"30px"}}>
             {[
               {
@@ -294,9 +241,9 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── GET IN TOUCH - PARALLAX SECTION ────────────────────────────────── */}
+      {/* contact parallax */}
       <section className="relative w-full h-screen overflow-hidden">
-        {/* Fixed Background Image with Parallax */}
+
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -309,7 +256,7 @@ export default function ServicesPage() {
           <div className="absolute inset-0 bg-black/50" />
         </div>
 
-        {/* Content Overlay */}
+
         <div className="relative z-10 h-full flex items-center">
           <div className="section-container w-full">
             <div className="max-w-3xl">

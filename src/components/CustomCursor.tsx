@@ -16,7 +16,7 @@ export default function CustomCursor() {
     let outlineX = 0;
     let outlineY = 0;
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const onMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
       dot.style.transform = `translate(${mouseX - 4}px, ${mouseY - 4}px)`;
@@ -29,15 +29,15 @@ export default function CustomCursor() {
       requestAnimationFrame(animate);
     };
 
-    const handleMouseEnterInteractive = () => {
+    const onEnter = () => {
       outline.classList.add("expanded");
     };
 
-    const handleMouseLeaveInteractive = () => {
+    const onLeave = () => {
       outline.classList.remove("expanded");
     };
 
-    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mousemove", onMove);
     animate();
 
     const interactiveElements = document.querySelectorAll(
@@ -45,15 +45,15 @@ export default function CustomCursor() {
     );
 
     interactiveElements.forEach((el) => {
-      el.addEventListener("mouseenter", handleMouseEnterInteractive);
-      el.addEventListener("mouseleave", handleMouseLeaveInteractive);
+      el.addEventListener("mouseenter", onEnter);
+      el.addEventListener("mouseleave", onLeave);
     });
 
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mousemove", onMove);
       interactiveElements.forEach((el) => {
-        el.removeEventListener("mouseenter", handleMouseEnterInteractive);
-        el.removeEventListener("mouseleave", handleMouseLeaveInteractive);
+        el.removeEventListener("mouseenter", onEnter);
+        el.removeEventListener("mouseleave", onLeave);
       });
     };
   }, []);

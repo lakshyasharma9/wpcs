@@ -8,6 +8,7 @@ import MagneticButton from "@/components/MagneticButton";
 import InfiniteMarquee from "@/components/InfiniteMarquee";
 import ServiceCard from "@/components/ServiceCard";
 import Crosshair from "@/components/Crosshair";
+import { services } from "@/data/services";
 import {
   ArrowDown,
   CheckCircle2,
@@ -29,44 +30,6 @@ const FloatingShapes = dynamic(() => import("@/components/FloatingShapes"), {
   ssr: false,
 });
 
-const services = [
-  {
-    title: "BIM (MEPF)",
-    description: "Comprehensive 3D Building Information Modeling for Mechanical, Electrical, Plumbing, and Fire Protection (MEPF) systems. We deliver clash-free, coordinated models to streamline your entire construction process.",
-    image: "/BIM(MEPF).png",
-  },
-  {
-    title: "Prefabrication",
-    description: "Detailed modeling and accurate spool drawings designed to optimize off-site manufacturing, reduce waste, and accelerate on-site installation.",
-    image: "/Prefabrication.png",
-  },
-  {
-    title: "Estimation",
-    description: "Precise material take-offs and cost estimates to help you bid competitively, plan budgets accurately, and control project finances.",
-    image: "/Estimation.png",
-  },
-  {
-    title: "Renderings",
-    description: "High-quality, photorealistic 3D visualizations that bring your designs to life, helping stakeholders easily conceptualize the final build.",
-    image: "/Renderings.png",
-  },
-  {
-    title: "Submittals Review",
-    description: "Thorough evaluation of shop drawings, equipment data, and material specifications to ensure strict compliance with project standards and design intent.",
-    image: "/Submittals Review.png",
-  },
-  {
-    title: "Project Management",
-    description: "End-to-end project oversight, including schedule coordination, resource allocation, and workflow optimization to ensure on-time delivery.",
-    image: "/Project Management.png",
-  },
-  {
-    title: "Drone Video",
-    description: "High-resolution aerial videography for accurate site surveys, real-time construction progress tracking, and compelling marketing material.",
-    image: "/Drone Video.png",
-  },
-];
-
 const stats = [
   { value: "100+", label: "Projects Completed", icon: <CheckCircle2 size={20} /> },
   { value: "4+", label: "Years Experience", icon: <Award size={20} /> },
@@ -76,23 +39,22 @@ const stats = [
 
 export default function HomePage() {
   const heroRef = useRef<HTMLElement>(null);
-  const processLineRef = useRef<HTMLDivElement>(null);
-  const processSectionRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const circleRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Scroll-driven green line grow + circles fill
-    if (processLineRef.current && processSectionRef.current) {
+    if (lineRef.current && sectionRef.current) {
       gsap.fromTo(
-        processLineRef.current,
+        lineRef.current,
         { scaleY: 0 },
         {
           scaleY: 1,
           ease: "none",
           scrollTrigger: {
-            trigger: processSectionRef.current,
+            trigger: sectionRef.current,
             start: "top 70%",
             end: "bottom 60%",
             scrub: 1,
@@ -100,7 +62,6 @@ export default function HomePage() {
         }
       );
 
-      // Each circle fills as line passes through it
       circleRefs.current.forEach((circle, i) => {
         if (!circle) return;
         gsap.fromTo(
@@ -112,7 +73,7 @@ export default function HomePage() {
             color: "white",
             ease: "none",
             scrollTrigger: {
-              trigger: processSectionRef.current,
+              trigger: sectionRef.current,
               start: `top ${65 - i * 15}%`,
               end: `top ${50 - i * 15}%`,
               scrub: 0.8,
@@ -264,14 +225,14 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div ref={processSectionRef} style={{ display: "flex", flexDirection: "column", position: "relative" }}>
+            <div ref={sectionRef} style={{ display: "flex", flexDirection: "column", position: "relative" }}>
               <div style={{
                 position: "absolute", left: "18px", top: "22px",
                 width: "2px", bottom: "22px",
                 background: "rgba(20,99,33,0.12)", borderRadius: "2px",
               }} />
               <div
-                ref={processLineRef}
+                ref={lineRef}
                 style={{
                   position: "absolute", left: "18px", top: "22px",
                   width: "2px", bottom: "22px",

@@ -7,19 +7,13 @@ import Timeline from "@/components/Timeline";
 import Image from "next/image";
 import Snowfall from "react-snowfall";
 import ServiceCard from "@/components/ServiceCard";
+import { services } from "@/data/services";
 
 const values = [
   { title: "Precision Engineering", desc: "Every model we build is clash-detected to sub-millimeter accuracy.", icon: Zap },
   { title: "Collaborative Spirit", desc: "We work as an extension of your own team, ensuring seamless communication.", icon: Users },
   { title: "Forward Thinking", desc: "Always exploring the latest in AI, XR, and generative design for AEC.", icon: Rocket },
   { title: "Global Reach", desc: "Headquartered in West Palm Beach, serving projects worldwide.", icon: Building2 },
-];
-
-const achievements = [
-  { number: "250+", label: "Projects Delivered", icon: Award },
-  { number: "15+", label: "Years Excellence", icon: TrendingUp },
-  { number: "120+", label: "Expert Team", icon: Users },
-  { number: "99.5%", label: "Client Satisfaction", icon: Shield },
 ];
 
 const events = [
@@ -40,44 +34,6 @@ const events = [
   { image: "/event/16.jpg" },
   { image: "/event/17.jpg" },
   { image: "/event/18.jpg" },
-];
-
-const services = [
-  {
-    title: "BIM (MEPF)",
-    description: "Comprehensive 3D Building Information Modeling for Mechanical, Electrical, Plumbing, and Fire Protection (MEPF) systems. We deliver clash-free, coordinated models to streamline your entire construction process.",
-    image: "/BIM(MEPF).png",
-  },
-  {
-    title: "Prefabrication",
-    description: "Detailed modeling and accurate spool drawings designed to optimize off-site manufacturing, reduce waste, and accelerate on-site installation.",
-    image: "/Prefabrication.png",
-  },
-  {
-    title: "Estimation",
-    description: "Precise material take-offs and cost estimates to help you bid competitively, plan budgets accurately, and control project finances.",
-    image: "/Estimation.png",
-  },
-  {
-    title: "Renderings",
-    description: "High-quality, photorealistic 3D visualizations that bring your designs to life, helping stakeholders easily conceptualize the final build.",
-    image: "/Renderings.png",
-  },
-  {
-    title: "Submittals Review",
-    description: "Thorough evaluation of shop drawings, equipment data, and material specifications to ensure strict compliance with project standards and design intent.",
-    image: "/Submittals Review.png",
-  },
-  {
-    title: "Project Management",
-    description: "End-to-end project oversight, including schedule coordination, resource allocation, and workflow optimization to ensure on-time delivery.",
-    image: "/Project Management.png",
-  },
-  {
-    title: "Drone Video",
-    description: "High-resolution aerial videography for accurate site surveys, real-time construction progress tracking, and compelling marketing material.",
-    image: "/Drone Video.png",
-  },
 ];
 
 export default function AboutPage() {
@@ -108,9 +64,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#F8FAF8]">
 
-      {/* ══════════════════════════════════════════════════════════════════
-          HERO SECTION - Full-Width Background with Overlay
-      ══════════════════════════════════════════════════════════════════ */}
+      {/* hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden" style={{ marginTop: "80px" }}>
         {/* Full-Width Background Image */}
         <div className="absolute inset-0 z-0">
@@ -172,9 +126,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
-          VISION & MISSION - Alternating Layout
-      ══════════════════════════════════════════════════════════════════ */}
+      {/* vision & mission */}
       <section className="vision-mission-section relative bg-white" style={{ paddingTop: "clamp(100px, 15vh, 160px)", paddingBottom: "clamp(90px, 15vh, 160px)"}}>
         <div className="section-container">
           
@@ -283,9 +235,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
-          EXPERTISE SHOWCASE
-      ══════════════════════════════════════════════════════════════════ */}
+      {/* services */}
       <section className="relative bg-[#F8FAF8]" style={{ paddingTop: "clamp(10px, 15vh, 160px)", paddingBottom: "clamp(100px, 15vh, 160px)" }}>
         <div className="section-container">
           <div className="w-full flex flex-col items-center opacity-0 translate-y-10 transition-all duration-1000" ref={addToRefs} style={{ marginBottom: "clamp(60px, 10vh, 100px)" }}>
@@ -314,9 +264,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
-          VALUES - Interactive Cards
-      ══════════════════════════════════════════════════════════════════ */}
+      {/* values */}
       <section className="relative bg-gradient-to-br from-white via-[#F8FAF8] to-white overflow-hidden" style={{ paddingTop: "clamp(100px, 15vh, 160px)", paddingBottom: "clamp(100px, 15vh, 160px)" }}>
         {/* Decorative Background Elements */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-[#146321]/5 to-transparent rounded-full blur-3xl" />
@@ -382,9 +330,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
-          MEET OUR TEAM
-      ══════════════════════════════════════════════════════════════════ */}
+      {/* team */}
       <section className="relative bg-[#146321]" style={{ paddingTop: "clamp(100px, 15vh, 160px)", paddingBottom: "clamp(100px, 15vh, 160px)" }}>
         <div className="section-container">
           <div className="flex flex-col items-center opacity-0 translate-y-10 transition-all duration-1000" ref={addToRefs} style={{ marginBottom: "clamp(60px, 10vh, 100px)" }}>
@@ -447,9 +393,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
-          TIMELINE
-      ══════════════════════════════════════════════════════════════════ */}
+      {/* timeline */}
       <section className="relative bg-[#F8FAF8]" style={{ paddingTop: "clamp(80px, 12vh, 140px)", paddingBottom: "clamp(80px, 12vh, 140px)" }}>
         <div className="section-container">
           <div className="flex flex-col items-center opacity-0 translate-y-10 transition-all duration-1000" ref={addToRefs} style={{ marginBottom: "clamp(48px, 8vh, 80px)" }}>
@@ -468,9 +412,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
-          EVENTS - Continuous Carousel
-      ══════════════════════════════════════════════════════════════════ */}
+      {/* events */}
       <section className="relative bg-white overflow-hidden" style={{ paddingTop: "clamp(80px, 12vh, 140px)", paddingBottom: "clamp(80px, 12vh, 140px)" }}>
         <div className="section-container">
           <div className="flex flex-col items-center opacity-0 translate-y-10 transition-all duration-1000" ref={addToRefs} style={{ marginBottom: "clamp(48px, 8vh, 80px)" }}>
@@ -512,9 +454,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
-          CTA - Premium Call to Action
-      ══════════════════════════════════════════════════════════════════ */}
+      {/* cta */}
       <section className="relative bg-white overflow-hidden" style={{ paddingTop: "clamp(80px, 12vh, 140px)", paddingBottom: "clamp(80px, 12vh, 140px)" }}>
         <div className="absolute inset-0 bg-gradient-to-br from-[#F8FAF8] to-white" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#146321]/5 rounded-full blur-3xl" />
