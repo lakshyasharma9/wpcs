@@ -67,9 +67,9 @@ export default function ServiceCard({
           src={image}
           alt={title}
           fill
-          sizes="400px"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+          loading="lazy"
           className="object-cover"
-          unoptimized
           style={{
             transition: "filter 0.4s ease, transform 0.4s ease",
             filter: hovered ? "brightness(0.35) blur(2px)" : "brightness(1.2)",

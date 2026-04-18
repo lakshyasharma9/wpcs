@@ -72,6 +72,7 @@ export default function AboutPage() {
             src="/about/hero-bg.jpg"
             alt="West Palm Construction Solutions"
             fill
+            sizes="100vw"
             priority
             className="object-cover"
             quality={100}
@@ -145,6 +146,8 @@ export default function AboutPage() {
                 src="/about/hero-building.jpg"
                 alt="Our Vision"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                loading="lazy"
                 className="object-cover"
               />
             </div>
@@ -227,6 +230,8 @@ export default function AboutPage() {
                 src="/about/our-mission.png"
                 alt="Our Mission"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                loading="lazy"
                 className="object-cover"
               />
             </div>
@@ -370,6 +375,8 @@ export default function AboutPage() {
                       src={member.image}
                       alt={member.name}
                       fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      loading="lazy"
                       className="object-cover"
                       style={{
                         filter: activeCard === i ? 'grayscale(0%)' : 'grayscale(100%)',
@@ -444,6 +451,8 @@ export default function AboutPage() {
                       src={event.image}
                       alt={`Event ${i + 1}`}
                       fill
+                      sizes="420px"
+                      loading="lazy"
                       className="object-cover"
                     />
                   </div>

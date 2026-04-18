@@ -130,6 +130,8 @@ export default function ProjectsPage() {
                       src={project.image}
                       alt={project.title}
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                      loading="lazy"
                       className="object-cover transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:blur-[2px]"
                       style={project.id === 2 ? { objectPosition: 'center', transform: 'scale(1.3)' } : {}}
                     />

@@ -17,13 +17,37 @@ const navLinks = [
 
 export default function Navbar() {
   const [isScrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    let lastY = window.scrollY;
+    let ticking = false;
+    
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const curr = window.scrollY;
+          setScrolled(curr > 50);
+          
+          if (curr < 50) {
+            setHidden(false);
+          } else if (curr > lastY + 5) {
+            setHidden(true);  // scrolling down
+          } else if (curr < lastY - 5) {
+            setHidden(false); // scrolling up
+          }
+          
+          lastY = curr;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -38,22 +62,24 @@ export default function Navbar() {
         left: 0,
         right: 0,
         zIndex: 1000,
-        transition: "all 0.5s ease",
+        transition: "transform 0.4s ease, background-color 0.5s ease, box-shadow 0.5s ease",
+        transform: hidden ? "translateY(-100%)" : "translateY(0)",
         backgroundColor: isScrolled ? "rgba(10, 59, 18, 0.95)" : "rgba(255, 255, 255, 0.97)",
         backdropFilter: isScrolled ? "blur(24px)" : "blur(8px)",
         WebkitBackdropFilter: isScrolled ? "blur(24px)" : "blur(8px)",
         boxShadow: isScrolled ? "0 4px 32px rgba(0,0,0,0.25)" : "0 1px 0 rgba(0,0,0,0.06)",
-        padding: isScrolled ? "10px 0" : "20px 0",
+        padding: "20px 0",
       }}
     >
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <div style={{ position: "relative", width: isScrolled ? 60 : 90, height: isScrolled ? 60 : 90, transition: "all 0.3s ease", flexShrink: 0, marginLeft: "clamp(0px, 3vw, 40px)", background: "transparent" }}>
+          <div style={{ position: "relative", width: 90, height: 90, transition: "all 0.3s ease", flexShrink: 0, marginLeft: "clamp(0px, 3vw, 40px)", background: "transparent" }}>
             <Image
               src="/West_Palm_Logo-removebg-preview.png"
               alt="WPCS Logo"
               fill
-              sizes="72px"
+              sizes="90px"
+              loading="eager"
               className="object-contain"
               priority
               unoptimized
@@ -63,7 +89,8 @@ export default function Navbar() {
               src="/logo-white.png"
               alt="WPCS Logo"
               fill
-              sizes="72px"
+              sizes="90px"
+              loading="eager"
               className="object-contain"
               priority
               unoptimized

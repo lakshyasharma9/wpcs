@@ -47,7 +47,7 @@ export default function MagneticButton({
       ? "magnetic-btn"
       : variant === "outline"
       ? "magnetic-btn !bg-transparent border-2 !border-[#146321] !text-[#146321] hover:!text-white"
-      : "magnetic-btn !bg-[#D4AF37] hover:!shadow-[0_0_20px_rgba(212,175,55,0.5)]";
+      : "magnetic-btn !bg-[#D4AF37] !text-[#0d1f0d] hover:!text-[#D4AF37] hover:!shadow-[0_0_20px_rgba(212,175,55,0.5)]";
 
   const content = (
     <div
@@ -59,11 +59,11 @@ export default function MagneticButton({
       {/* TODO: maybe extract link wrapper to its own subcomponent */}
       {href ? (
         <Link href={href} className={`${baseClass} ${className}`} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', ...style }}>
-          {children}
+          <span style={{ position: 'relative', zIndex: 1 }}>{children}</span>
         </Link>
       ) : (
         <button onClick={onClick} className={`${baseClass} ${className}`} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', ...style }}>
-          {children}
+          <span style={{ position: 'relative', zIndex: 1 }}>{children}</span>
         </button>
       )}
     </div>

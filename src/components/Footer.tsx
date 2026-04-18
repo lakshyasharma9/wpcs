@@ -106,6 +106,7 @@ export default function Footer() {
                 src="/logo-white.png"
                 alt="West Palm Construction Solutions"
                 width={120} height={48}
+                loading="lazy"
                 unoptimized
                 style={{ objectFit: "contain", objectPosition: "left" }}
               />
