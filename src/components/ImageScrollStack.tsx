@@ -132,8 +132,8 @@ export default function ImageScrollStack({
       card.style.transformOrigin = 'top center';
       card.style.backfaceVisibility = 'hidden';
       card.style.transform = 'translateZ(0)';
-      card.style.WebkitFontSmoothing = 'antialiased';
-      card.style.imageRendering = 'crisp-edges';
+      (card.style as any).WebkitFontSmoothing = 'antialiased';
+      (card.style as any).imageRendering = 'crisp-edges';
     });
 
     // Use native scroll instead of Lenis for navbar compatibility
